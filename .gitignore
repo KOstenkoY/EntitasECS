@@ -56,6 +56,11 @@ sysinfo.txt
 *.aab
 *.unitypackage
 
+# Entitas
+Jenny.zip
+Jenny.zip.meta
+*.userproperties
+
 # Crashlytics generated file
 crashlytics-build.properties
 
