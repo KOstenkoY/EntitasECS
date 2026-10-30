@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Runtime.Gameplay.Spawn;
 using Runtime.Gameplay.Tank;
 using UnityEngine;
 
@@ -7,12 +8,14 @@ namespace Runtime.Gameplay.Initializers
     public class LevelInitializer
     {
         private Contexts _context;
+        private SpawnPointManager _spawnPointManager;
 
         private List<TankView> tanks = new ();
 
-        public LevelInitializer(Contexts context)
+        public LevelInitializer(Contexts context, SpawnPointManager spawnPointManager)
         {
             _context = context;
+            _spawnPointManager = spawnPointManager;
         }
 
         public void Initialize()
@@ -41,8 +44,8 @@ namespace Runtime.Gameplay.Initializers
             entity.AddMovement(3);
             entity.AddPosition(Vector2Int.zero);
 
-            var instance = GameObject.Instantiate(tank, Vector3.zero, Quaternion.identity);
-            var viewComponent = tank.GetComponent<TankView>();
+            var instance = GameObject.Instantiate(tank, _spawnPointManager.GetRandomSpawnPointPosition(), Quaternion.identity);
+            var viewComponent = instance.GetComponent<TankView>();
             viewComponent.Link(entity);
             
             tanks.Add(viewComponent);

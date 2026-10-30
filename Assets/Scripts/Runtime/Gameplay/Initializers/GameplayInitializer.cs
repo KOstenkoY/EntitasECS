@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using Runtime.Gameplay.Spawn;
 
 namespace Runtime.Gameplay.Initializers
 {
@@ -7,9 +8,9 @@ namespace Runtime.Gameplay.Initializers
         private readonly Systems _systems;
         private readonly LevelInitializer _levelInitializer;
 
-        public GameplayInitializer(Contexts context)
+        public GameplayInitializer(Contexts context, SpawnPointManager spawnPointManger)
         {
-            _levelInitializer = new LevelInitializer(context);
+            _levelInitializer = new LevelInitializer(context, spawnPointManger);
             _systems = new GameplaySystems(context);
 
         }
