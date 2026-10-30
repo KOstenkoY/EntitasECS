@@ -6,7 +6,7 @@ namespace Runtime.Gameplay.Initializers
     {
         public GameplaySystems(Contexts context)
         {
-            
+            Add(new HealthEventSystem(context));
         }
     }
 }
