@@ -1,10 +1,8 @@
 using Entitas;
+using Entitas.CodeGeneration.Attributes;
 
-namespace Runtime.ECS.Gameplay.Player.Components
+[Game, Event(EventTarget.Self)]
+public class HealthComponent : IComponent
 {
-    [Game]
-    public class HealthComponent : IComponent
-    {
-        public int Health;
-    }
+    public int Health;
 }
