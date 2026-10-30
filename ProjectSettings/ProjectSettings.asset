@@ -781,7 +781,7 @@ PlayerSettings:
     PS4: 
     PS5: 
     QNX: 
-    Standalone: 
+    Standalone: SENTIS_ANALYTICS_ENABLED
     VisionOS: 
     WebGL: 
     XboxOne: 
