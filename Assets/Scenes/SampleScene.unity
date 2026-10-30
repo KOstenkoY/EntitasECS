@@ -746,6 +746,10 @@ MonoBehaviour:
   - {fileID: 1775484152}
   - {fileID: 585721649}
   - {fileID: 596193686}
+  _playerCheckRadius: 1
+  _playerLayers:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

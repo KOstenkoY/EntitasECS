@@ -6,12 +6,24 @@ namespace Runtime.Gameplay.Spawn
     public class SpawnPointManager : MonoBehaviour
     {
         [SerializeField] private List<Transform> _spawnPoints = new();
+        [SerializeField] private float _playerCheckRadius = 5f;
+        [SerializeField] private LayerMask _playerLayers;
 
+        private readonly List<Collider2D> _overlapBuffer = new();
+
+        private ContactFilter2D _playerFilter;
         private int[] _shuffleOrder;
 
         private void Awake()
         {
             RebuildShuffleOrder();
+
+            _playerFilter = new ContactFilter2D
+            {
+                useLayerMask = true,
+                layerMask = _playerLayers,
+                useTriggers = true,
+            };
         }
 
         public Vector2 GetRandomSpawnPointPosition()
@@ -31,10 +43,8 @@ namespace Runtime.Gameplay.Spawn
             return _spawnPoints[_shuffleOrder[0]].position;
         }
 
-        private bool IsPlayerAround(Vector2 position)
-        {
-            return false;
-        }
+        private bool IsPlayerAround(Vector2 position) =>
+            Physics2D.OverlapCircle(position, _playerCheckRadius, _playerFilter, _overlapBuffer) > 0;
 
         // Fisher-Yates over a reusable index buffer, so no allocations per call.
         private void Shuffle()
@@ -57,6 +67,19 @@ namespace Runtime.Gameplay.Spawn
             for (var i = 0; i < _shuffleOrder.Length; i++)
             {
                 _shuffleOrder[i] = i;
+            }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.cyan;
+
+            foreach (var point in _spawnPoints)
+            {
+                if (point != null)
+                {
+                    Gizmos.DrawWireSphere(point.position, _playerCheckRadius);
+                }
             }
         }
     }
