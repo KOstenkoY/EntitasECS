@@ -11,20 +11,14 @@ namespace Runtime.Gameplay.Spawn
 
         private readonly List<Collider2D> _overlapBuffer = new();
 
-        private ContactFilter2D _playerFilter;
         private int[] _shuffleOrder;
 
-        private void Awake()
+        private ContactFilter2D PlayerFilter => new()
         {
-            RebuildShuffleOrder();
-
-            _playerFilter = new ContactFilter2D
-            {
-                useLayerMask = true,
-                layerMask = _playerLayers,
-                useTriggers = true,
-            };
-        }
+            useLayerMask = true,
+            layerMask = _playerLayers,
+            useTriggers = true,
+        };
 
         public Vector2 GetRandomSpawnPointPosition()
         {
@@ -44,7 +38,7 @@ namespace Runtime.Gameplay.Spawn
         }
 
         private bool IsPlayerAround(Vector2 position) =>
-            Physics2D.OverlapCircle(position, _playerCheckRadius, _playerFilter, _overlapBuffer) > 0;
+            Physics2D.OverlapCircle(position, _playerCheckRadius, PlayerFilter, _overlapBuffer) > 0;
 
         // Fisher-Yates over a reusable index buffer, so no allocations per call.
         private void Shuffle()
