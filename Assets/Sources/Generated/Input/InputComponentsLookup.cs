@@ -9,17 +9,17 @@
 public static class InputComponentsLookup {
 
     public const int Direction = 0;
-    public const int MoveSystem = 1;
+    public const int ManualMoveSystem = 1;
 
     public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
         "Direction",
-        "MoveSystem"
+        "ManualMoveSystem"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(DirectionComponent),
-        typeof(MoveSystemComponent)
+        typeof(ManualMoveSystemComponent)
     };
 }

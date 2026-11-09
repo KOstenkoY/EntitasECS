@@ -7,6 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 [Entitas.CodeGeneration.Attributes.DontGenerate(false)]
-public sealed class MoveSystemComponent : Entitas.IComponent {
-    public MoveSystem value;
+public sealed class ManualMoveSystemComponent : Entitas.IComponent {
+    public ManualMoveSystem value;
 }

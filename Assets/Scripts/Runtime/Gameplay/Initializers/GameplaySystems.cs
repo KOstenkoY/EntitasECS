@@ -8,7 +8,7 @@ namespace Runtime.Gameplay.Initializers
         {
             // Systems
             Add(new EmitInputSystem(context, inputReader));
-            Add(new MoveSystem(context));
+            Add(new ManualMoveSystem(context));
 
             // Event Systems
             Add(new HealthEventSystem(context));
