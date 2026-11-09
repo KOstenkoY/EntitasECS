@@ -20,10 +20,14 @@ namespace Runtime.Gameplay.Initializers
 
         public void Initialize()
         {
-            InitializeTank(LoadTank("Prefabs/Player"));
-            InitializeTank(LoadTank("Prefabs/Enemy"));
-        }
+            var builder = new TankBuilder(_context, _spawnPointManager);
+            var player = builder.BuildTank(LoadTank("Prefabs/Player"), 3, 3)
+                .AddManualControl()
+                .Build();
 
+            var enemy = builder.BuildTank(LoadTank("Prefabs/Enemy"), 3, 0)
+                .Build();
+        }
 
         public void Deinitialize()
         {
@@ -36,19 +40,5 @@ namespace Runtime.Gameplay.Initializers
 
         private GameObject LoadTank(string path) => 
             Resources.Load(path) as GameObject;
-
-        private void InitializeTank(GameObject tank)
-        {
-            var entity = _context.game.CreateEntity();
-            entity.AddHealth(3);
-            entity.AddMovement(3);
-            entity.AddPosition(Vector2Int.zero);
-
-            var instance = GameObject.Instantiate(tank, _spawnPointManager.GetRandomSpawnPointPosition(), Quaternion.identity);
-            var viewComponent = instance.GetComponent<TankView>();
-            viewComponent.Link(entity);
-            
-            tanks.Add(viewComponent);
-        }
     }
 }

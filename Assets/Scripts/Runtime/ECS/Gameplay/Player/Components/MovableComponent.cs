@@ -1,7 +1,7 @@
 ﻿using Entitas;
 
 [Game]
-public class MovementComponent : IComponent
+public class MovableComponent : IComponent
 {
     public float speed;
 }
