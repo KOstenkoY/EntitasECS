@@ -24,7 +24,7 @@ namespace Runtime.Gameplay.Tank
             
             _entity.AddHealth(maxHealth);
             _entity.AddMovable(speed);
-            _entity.AddPosition(Vector2Int.zero);
+            _entity.AddPosition(_spawnPointManager.GetRandomSpawnPointPosition());
 
             return this;
         }
@@ -37,7 +37,7 @@ namespace Runtime.Gameplay.Tank
 
         public TankView Build()
         {
-            var spawnPosition = _spawnPointManager.GetRandomSpawnPointPosition();
+            var spawnPosition = _entity.position.position;
             var instance = GameObject.Instantiate(_tankPrefab, spawnPosition, Quaternion.identity);
 
             var viewComponent = instance.GetComponent<TankView>();
