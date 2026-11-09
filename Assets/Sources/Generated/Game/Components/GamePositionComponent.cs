@@ -11,14 +11,14 @@ public partial class GameEntity {
     public PositionComponent position { get { return (PositionComponent)GetComponent(GameComponentsLookup.Position); } }
     public bool hasPosition { get { return HasComponent(GameComponentsLookup.Position); } }
 
-    public void AddPosition(UnityEngine.Vector2Int newPosition) {
+    public void AddPosition(UnityEngine.Vector2 newPosition) {
         var index = GameComponentsLookup.Position;
         var component = (PositionComponent)CreateComponent(index, typeof(PositionComponent));
         component.position = newPosition;
         AddComponent(index, component);
     }
 
-    public void ReplacePosition(UnityEngine.Vector2Int newPosition) {
+    public void ReplacePosition(UnityEngine.Vector2 newPosition) {
         var index = GameComponentsLookup.Position;
         var component = (PositionComponent)CreateComponent(index, typeof(PositionComponent));
         component.position = newPosition;

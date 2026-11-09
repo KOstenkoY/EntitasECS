@@ -34,5 +34,10 @@ namespace Runtime.UI
                 _entity.RemoveHealthListener(this);
             }
         }
+
+        public void OnAnyHealth(GameEntity entity, int health)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

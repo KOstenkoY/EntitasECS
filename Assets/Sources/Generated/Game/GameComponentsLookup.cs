@@ -10,25 +10,31 @@ public static class GameComponentsLookup {
 
     public const int Health = 0;
     public const int HealthListener = 1;
-    public const int Movement = 2;
-    public const int Player = 3;
-    public const int Position = 4;
+    public const int ManualInput = 2;
+    public const int Movable = 3;
+    public const int Player = 4;
+    public const int Position = 5;
+    public const int PositionListener = 6;
 
-    public const int TotalComponents = 5;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
         "Health",
         "HealthListener",
-        "Movement",
+        "ManualInput",
+        "Movable",
         "Player",
-        "Position"
+        "Position",
+        "PositionListener"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(HealthComponent),
         typeof(HealthListenerComponent),
-        typeof(MovementComponent),
+        typeof(ManualInputComponent),
+        typeof(MovableComponent),
         typeof(PlayerComponent),
-        typeof(PositionComponent)
+        typeof(PositionComponent),
+        typeof(PositionListenerComponent)
     };
 }
