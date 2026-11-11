@@ -4,25 +4,36 @@ using UnityEngine.InputSystem;
 namespace Runtime.Gameplay.Input
 {
     public class InputReader : MonoBehaviour
-    {
+    {        
         private const string GameplayMapName = "Gameplay";
         private const string MoveActionName = "Move";
+        private const string FireActionName = "Fire";
+     
         private const float PressThreshold = 0.5f;
-
+        
         [SerializeField] private InputActionAsset _actions;
 
         private InputAction _move;
+        private InputAction _fire;
         private Vector2Int _direction;
         private Vector2Int _screenDirection;
 
-        private void Awake() =>
+        private void Awake()
+        {
             _move = _actions.FindActionMap(GameplayMapName, true).FindAction(MoveActionName, true);
+            _fire = _actions.FindActionMap(GameplayMapName, true).FindAction(FireActionName, true);
+        }
 
-        private void OnEnable() => _move.Enable();
+        private void OnEnable()
+        {
+            _move.Enable();
+            _fire.Enable();
+        }
 
         private void OnDisable()
         {
             _move.Disable();
+            _fire.Disable();
             _screenDirection = Vector2Int.zero;
             _direction = Vector2Int.zero;
         }
@@ -35,6 +46,8 @@ namespace Runtime.Gameplay.Input
 
             return _direction;
         }
+
+        public bool ReadFire() => _fire.IsPressed();
 
         public void Press(Vector2Int direction) => _screenDirection = direction;
 
