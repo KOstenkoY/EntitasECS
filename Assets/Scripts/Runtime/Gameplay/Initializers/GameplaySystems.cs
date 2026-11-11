@@ -13,6 +13,7 @@ namespace Runtime.Gameplay.Initializers
             // Event Systems
             Add(new HealthEventSystem(context));
             Add(new PositionEventSystem(context));
+            Add(new RotationEventSystem(context));
         }
     }
 }

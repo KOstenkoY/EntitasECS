@@ -25,6 +25,7 @@ namespace Runtime.Gameplay.Tank
             _entity.AddHealth(maxHealth);
             _entity.AddMovable(speed);
             _entity.AddPosition(_spawnPointManager.GetRandomSpawnPointPosition());
+            _entity.AddRotation(Vector2Int.up);
 
             return this;
         }

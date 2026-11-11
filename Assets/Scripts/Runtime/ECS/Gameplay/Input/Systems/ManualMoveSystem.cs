@@ -8,7 +8,7 @@ public class ManualMoveSystem : IExecuteSystem
 
     public ManualMoveSystem(Contexts contexts)
     {
-        var matcher = GameMatcher.AllOf(GameMatcher.Movable, GameMatcher.Position, GameMatcher.ManualInput);
+        var matcher = GameMatcher.AllOf(GameMatcher.Movable, GameMatcher.Position, GameMatcher.Rotation, GameMatcher.ManualInput);
         _movables = contexts.game.GetGroup(matcher);
         _inputContext = contexts.input;
     }
@@ -25,6 +25,7 @@ public class ManualMoveSystem : IExecuteSystem
         {
             var step = direction * (entity.movable.speed * Time.deltaTime);
             entity.ReplacePosition(entity.position.position + step);
+            entity.ReplaceRotation(_inputContext.direction.direction);
         }
     }
 }
