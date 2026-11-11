@@ -37,6 +37,7 @@ namespace Runtime.Gameplay.Input
             _fire.Disable();
             _screenDirection = Vector2Int.zero;
             _direction = Vector2Int.zero;
+            _firePressed = false;
         }
 
         public Vector2Int ReadDirection()
@@ -48,7 +49,7 @@ namespace Runtime.Gameplay.Input
             return _direction;
         }
 
-        public bool ReadFire() => _firePressed && _fire.IsPressed();
+        public bool ReadFire() => _firePressed || _fire.IsPressed();
 
         public void PressMoveButton(Vector2Int direction) => _screenDirection = direction;
 
