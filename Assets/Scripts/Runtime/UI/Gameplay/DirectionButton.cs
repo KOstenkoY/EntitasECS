@@ -9,10 +9,10 @@ namespace Runtime.UI
         [SerializeField] private InputReader _inputReader;
         [SerializeField] private MoveDirection _direction;
 
-        public void OnPointerDown(PointerEventData eventData) => _inputReader.Press(_direction.ToVector());
+        public void OnPointerDown(PointerEventData eventData) => _inputReader.PressMoveButton(_direction.ToVector());
 
-        public void OnPointerUp(PointerEventData eventData) => _inputReader.Release(_direction.ToVector());
+        public void OnPointerUp(PointerEventData eventData) => _inputReader.ReleaseMoveButton(_direction.ToVector());
 
-        public void OnPointerExit(PointerEventData eventData) => _inputReader.Release(_direction.ToVector());
+        public void OnPointerExit(PointerEventData eventData) => _inputReader.ReleaseMoveButton(_direction.ToVector());
     }
 }

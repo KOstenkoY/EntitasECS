@@ -17,6 +17,7 @@ namespace Runtime.Gameplay.Input
         private InputAction _fire;
         private Vector2Int _direction;
         private Vector2Int _screenDirection;
+        private bool _firePressed;
 
         private void Awake()
         {
@@ -47,17 +48,19 @@ namespace Runtime.Gameplay.Input
             return _direction;
         }
 
-        public bool ReadFire() => _fire.IsPressed();
+        public bool ReadFire() => _firePressed && _fire.IsPressed();
 
-        public void Press(Vector2Int direction) => _screenDirection = direction;
+        public void PressMoveButton(Vector2Int direction) => _screenDirection = direction;
 
-        public void Release(Vector2Int direction)
+        public void ReleaseMoveButton(Vector2Int direction)
         {
             if (_screenDirection == direction)
-            {
                 _screenDirection = Vector2Int.zero;
-            }
         }
+
+        public void PressFireButton() => _firePressed = true;
+
+        public void ReleaseFireButton() => _firePressed = false;
 
         private static Vector2Int ToSingleAxis(Vector2 raw, Vector2Int current)
         {
@@ -72,14 +75,10 @@ namespace Runtime.Gameplay.Input
             if (Mathf.Approximately(horizontal, vertical))
             {
                 if (current.x != 0)
-                {
                     return new Vector2Int(SignOf(raw.x), 0);
-                }
 
                 if (current.y != 0)
-                {
                     return new Vector2Int(0, SignOf(raw.y));
-                }
             }
 
             return horizontal >= vertical
