@@ -8,12 +8,13 @@ namespace Runtime.Gameplay.Initializers
     {
         [SerializeField] private SpawnPointManager spawnPointManager;
         [SerializeField] private InputReader inputReader;
+        [SerializeField] private BulletSpawner bulletSpawner;
 
         private GameplayInitializer _gameplayInitializer;
 
         private void Awake()
         {
-            _gameplayInitializer = new GameplayInitializer(Contexts.sharedInstance, spawnPointManager, inputReader);
+            _gameplayInitializer = new GameplayInitializer(Contexts.sharedInstance, spawnPointManager, inputReader, bulletSpawner);
             _gameplayInitializer.Initialize();
         }
 
