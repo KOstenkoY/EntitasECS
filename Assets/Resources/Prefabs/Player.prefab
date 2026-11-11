@@ -198,6 +198,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fbd6b7da9e18774d8cb782d7da00138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPool: {fileID: 0}
+  <spawnPoint>k__BackingField: {fileID: 3626674573726196315}
 --- !u!114 &5849460465306413253
 MonoBehaviour:
   m_ObjectHideFlags: 0
