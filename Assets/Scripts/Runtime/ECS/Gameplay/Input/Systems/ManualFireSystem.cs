@@ -12,6 +12,7 @@ public class ManualFireSystem : IExecuteSystem
         var matcher = GameMatcher.AllOf(GameMatcher.Rotation, GameMatcher.Position, GameMatcher.ManualInput);
         _shooters = contexts.game.GetGroup(matcher);
         _inputContext = contexts.input;
+        _gameContext = contexts.game;
     }
 
     public void Execute()
@@ -20,14 +21,16 @@ public class ManualFireSystem : IExecuteSystem
             return;
 
         foreach(var e in _shooters.GetEntities())
-        {
-            var bullet = _gameContext.CreateEntity();
-            bullet.isBullet = true;
-            bullet.AddDamage(1);
-            bullet.AddPosition(e.position.position);
-            bullet.AddRotation(e.rotation.rotation);
-            bullet.AddMovable(3f);
-            // some logic
-        }
+            Fire(e);
+    }
+
+    private void Fire(GameEntity shooter)
+    {
+        var bullet = _gameContext.CreateEntity();
+        bullet.isBullet = true;
+        bullet.AddDamage(1);
+        bullet.AddPosition(shooter.position.position);
+        bullet.AddRotation(shooter.rotation.rotation);
+        bullet.AddMovable(3f);
     }
 }
