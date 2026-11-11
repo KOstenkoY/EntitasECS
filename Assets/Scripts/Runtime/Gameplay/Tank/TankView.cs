@@ -1,5 +1,6 @@
 using Entitas;
 using Entitas.Unity;
+using Runtime.Gameplay.Pool;
 using Runtime.Gameplay.View;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace Runtime.Gameplay.Tank
 {
     public class TankView : MonoBehaviour, IView, IPositionListener, IRotationListener
     {
+        [SerializeField] private ObjectPool _bulletPool;
+
         private GameEntity _linkedEntity;
         private Transform _transform;
 
@@ -31,6 +34,11 @@ namespace Runtime.Gameplay.Tank
             _linkedEntity.RemoveRotationListener(this);
             gameObject.Unlink();
             _linkedEntity = null;
+        }
+
+        public void Fire()
+        {
+            var bullet = _bulletPool.Get();
         }
 
         public void OnPosition(GameEntity entity, Vector2 position) =>
