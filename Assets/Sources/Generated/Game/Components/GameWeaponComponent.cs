@@ -11,21 +11,21 @@ public partial class GameEntity {
     public WeaponComponent weapon { get { return (WeaponComponent)GetComponent(GameComponentsLookup.Weapon); } }
     public bool hasWeapon { get { return HasComponent(GameComponentsLookup.Weapon); } }
 
-    public void AddWeapon(float newBulletSpeed, int newDamage, UnityEngine.Vector2 newSpawnPosition) {
+    public void AddWeapon(float newBulletSpeed, int newDamage, UnityEngine.Vector2 newSpawnOffset) {
         var index = GameComponentsLookup.Weapon;
         var component = (WeaponComponent)CreateComponent(index, typeof(WeaponComponent));
         component.bulletSpeed = newBulletSpeed;
         component.damage = newDamage;
-        component.spawnPosition = newSpawnPosition;
+        component.spawnOffset = newSpawnOffset;
         AddComponent(index, component);
     }
 
-    public void ReplaceWeapon(float newBulletSpeed, int newDamage, UnityEngine.Vector2 newSpawnPosition) {
+    public void ReplaceWeapon(float newBulletSpeed, int newDamage, UnityEngine.Vector2 newSpawnOffset) {
         var index = GameComponentsLookup.Weapon;
         var component = (WeaponComponent)CreateComponent(index, typeof(WeaponComponent));
         component.bulletSpeed = newBulletSpeed;
         component.damage = newDamage;
-        component.spawnPosition = newSpawnPosition;
+        component.spawnOffset = newSpawnOffset;
         ReplaceComponent(index, component);
     }
 
