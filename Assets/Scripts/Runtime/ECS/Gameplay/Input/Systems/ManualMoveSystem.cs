@@ -17,9 +17,7 @@ public class ManualMoveSystem : IExecuteSystem
     {
         Vector2 direction = _inputContext.direction.direction;
         if (direction == Vector2.zero)
-        {
             return;
-        }
 
         foreach (var entity in _movables.GetEntities())
         {
