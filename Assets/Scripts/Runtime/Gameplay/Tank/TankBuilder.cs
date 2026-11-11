@@ -11,8 +11,6 @@ namespace Runtime.Gameplay.Tank
         private GameEntity _entity;
         private GameObject _tankPrefab;
 
-        private TankView _tankView;
-
         public TankBuilder(Contexts contexts, SpawnPointManager spawnPointManager)
         {
             _contexts = contexts;
@@ -28,7 +26,7 @@ namespace Runtime.Gameplay.Tank
             _entity.AddMovable(speed);
             _entity.AddPosition(_spawnPointManager.GetRandomSpawnPointPosition());
             _entity.AddRotation(Vector2Int.up);
-            _entity.AddWeapon(bulletSpeed, bulletDamage, GetTankViewFromPrefab(_tankPrefab).spawnPoint.position);
+            _entity.AddWeapon(bulletSpeed, bulletDamage, GetSpawnOffset(_tankPrefab));
 
             return this;
         }
@@ -44,12 +42,16 @@ namespace Runtime.Gameplay.Tank
             var spawnPosition = _entity.position.position;
             var instance = GameObject.Instantiate(_tankPrefab, spawnPosition, Quaternion.identity);
 
-            GetTankViewFromPrefab(instance).Link(_entity);
+            var tankView = instance.GetComponent<TankView>();
+            tankView.Link(_entity);
 
-            return _tankView;
+            return tankView;
         }
 
-        public TankView GetTankViewFromPrefab(GameObject prefab) =>
-            _tankView ??= prefab.GetComponent<TankView>();
+        private static Vector2 GetSpawnOffset(GameObject prefab)
+        {
+            var tankView = prefab.GetComponent<TankView>();
+            return tankView.transform.InverseTransformPoint(tankView.spawnPoint.position);
+        }
     }
 }
