@@ -28,9 +28,9 @@ public class ManualFireSystem : IExecuteSystem
     {
         var bullet = _gameContext.CreateEntity();
         bullet.isBullet = true;
-        bullet.AddDamage(1);
-        bullet.AddPosition(shooter.position.position);
+        bullet.AddDamage(shooter.weapon.damage);
+        bullet.AddPosition(shooter.weapon.spawnPosition);
         bullet.AddRotation(shooter.rotation.rotation);
-        bullet.AddMovable(3f);
+        bullet.AddMovable(shooter.weapon.bulletSpeed);
     }
 }

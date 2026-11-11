@@ -8,7 +8,7 @@ public class MoveSystem : IExecuteSystem
 
     public MoveSystem(Contexts contexts)
     {
-        var matcher = GameMatcher.AllOf(GameMatcher.Position, GameMatcher.Rotation, GameMatcher.Movable)
+        var matcher = GameMatcher.AllOf(GameMatcher.Position, GameMatcher.Movable)
             .NoneOf(GameMatcher.ManualInput);
 
         _movable = contexts.game.GetGroup(matcher);

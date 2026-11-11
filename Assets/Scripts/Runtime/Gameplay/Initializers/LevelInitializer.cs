@@ -21,11 +21,11 @@ namespace Runtime.Gameplay.Initializers
         public void Initialize()
         {
             var builder = new TankBuilder(_context, _spawnPointManager);
-            var player = builder.BuildTank(LoadTank("Prefabs/Player"), 3, 3)
+            var player = builder.BuildTank(LoadTank("Prefabs/Player"), 3, 3, 3, 1)
                 .AddManualControl()
                 .Build();
 
-            var enemy = builder.BuildTank(LoadTank("Prefabs/Enemy"), 3, 0)
+            var enemy = builder.BuildTank(LoadTank("Prefabs/Enemy"), 3, 0, 3, 1)
                 .Build();
         }
 

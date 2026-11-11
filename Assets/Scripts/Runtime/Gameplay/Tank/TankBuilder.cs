@@ -11,13 +11,15 @@ namespace Runtime.Gameplay.Tank
         private GameEntity _entity;
         private GameObject _tankPrefab;
 
+        private TankView _tankView;
+
         public TankBuilder(Contexts contexts, SpawnPointManager spawnPointManager)
         {
             _contexts = contexts;
             _spawnPointManager = spawnPointManager;
         }
 
-        public TankBuilder BuildTank(GameObject tankPrefab, int maxHealth, float speed)
+        public TankBuilder BuildTank(GameObject tankPrefab, int maxHealth, float speed, float bulletSpeed, int bulletDamage)
         {
             _tankPrefab = tankPrefab;
             _entity = _contexts.game.CreateEntity();
@@ -26,6 +28,7 @@ namespace Runtime.Gameplay.Tank
             _entity.AddMovable(speed);
             _entity.AddPosition(_spawnPointManager.GetRandomSpawnPointPosition());
             _entity.AddRotation(Vector2Int.up);
+            _entity.AddWeapon(bulletSpeed, bulletDamage, GetTankViewFromPrefab(_tankPrefab).spawnPoint.position);
 
             return this;
         }
@@ -41,10 +44,12 @@ namespace Runtime.Gameplay.Tank
             var spawnPosition = _entity.position.position;
             var instance = GameObject.Instantiate(_tankPrefab, spawnPosition, Quaternion.identity);
 
-            var viewComponent = instance.GetComponent<TankView>();
-            viewComponent.Link(_entity);
+            GetTankViewFromPrefab(instance).Link(_entity);
 
-            return viewComponent;
+            return _tankView;
         }
+
+        public TankView GetTankViewFromPrefab(GameObject prefab) =>
+            _tankView ??= prefab.GetComponent<TankView>();
     }
 }

@@ -9,6 +9,7 @@ namespace Runtime.Gameplay.Tank
     public class TankView : MonoBehaviour, IView, IPositionListener, IRotationListener
     {
         [SerializeField] private ObjectPool _bulletPool;
+        [field: SerializeField] public Transform spawnPoint { get; private set; }
 
         private GameEntity _linkedEntity;
         private Transform _transform;
