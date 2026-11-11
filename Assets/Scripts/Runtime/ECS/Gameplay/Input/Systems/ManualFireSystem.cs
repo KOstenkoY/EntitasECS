@@ -3,6 +3,8 @@
 public class ManualFireSystem : IExecuteSystem
 {
     private readonly InputContext _inputContext;
+    private readonly GameContext _gameContext;
+
     private readonly IGroup<GameEntity> _shooters;
 
     public ManualFireSystem(Contexts contexts)
@@ -17,9 +19,15 @@ public class ManualFireSystem : IExecuteSystem
         if (!_inputContext.isFire)
             return;
 
-        foreach(var entity in _shooters.GetEntities())
+        foreach(var e in _shooters.GetEntities())
         {
-            
+            var bullet = _gameContext.CreateEntity();
+            bullet.isBullet = true;
+            bullet.AddDamage(1);
+            bullet.AddPosition(e.position.position);
+            bullet.AddRotation(e.rotation.rotation);
+            bullet.AddMovable(3f);
+            // some logic
         }
     }
 }
