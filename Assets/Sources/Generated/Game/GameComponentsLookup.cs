@@ -8,19 +8,23 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Health = 0;
-    public const int HealthListener = 1;
-    public const int ManualInput = 2;
-    public const int Movable = 3;
-    public const int Player = 4;
-    public const int Position = 5;
-    public const int PositionListener = 6;
-    public const int Rotation = 7;
-    public const int RotationListener = 8;
+    public const int Bullet = 0;
+    public const int Damage = 1;
+    public const int Health = 2;
+    public const int HealthListener = 3;
+    public const int ManualInput = 4;
+    public const int Movable = 5;
+    public const int Player = 6;
+    public const int Position = 7;
+    public const int PositionListener = 8;
+    public const int Rotation = 9;
+    public const int RotationListener = 10;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
+        "Bullet",
+        "Damage",
         "Health",
         "HealthListener",
         "ManualInput",
@@ -33,6 +37,8 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(BulletComponent),
+        typeof(DamageComponent),
         typeof(HealthComponent),
         typeof(HealthListenerComponent),
         typeof(ManualInputComponent),
